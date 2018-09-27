@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StatusView">
+        <attr name="sv_loading_view" format="reference" />
+        <attr name="sv_empty_view" format="reference" />
+        <attr name="sv_error_view" format="reference" />
+    </declare-styleable>
+</resources>
