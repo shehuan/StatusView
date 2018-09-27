@@ -5,21 +5,32 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/sv_empty_iv"
+        android:id="@+id/sv_empty_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/sv_error" />
+        android:src="@drawable/sv_empty" />
 
     <TextView
-        android:id="@+id/sv_loading_tv"
+        android:id="@+id/sv_empty_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sv_empty_iv"
+        android:layout_below="@+id/sv_empty_icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="加载失败"
+        android:text="暂无数据"
         android:textColor="#999999"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/sv_empty_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sv_loading_tip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="点我重试"
+        android:textColor="#ff0000"
         android:textSize="16sp" />
 
 </RelativeLayout>

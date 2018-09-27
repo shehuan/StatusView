@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +22,15 @@ public class StatusView extends FrameLayout {
 
     private View contentView;
 
-    private View loadingView;
-    private View emptyView;
-    private View errorView;
+    private @LayoutRes
+    int loadingLayoutId = R.layout.sv_loading_layout;
+    private @LayoutRes
+    int emptyLayoutId = R.layout.sv_empty_layout;
+    private @LayoutRes
+    int errorLayoutId = R.layout.sv_error_layout;
 
-    private @LayoutRes
-    int loadingLayoutRes;
-    private @LayoutRes
-    int emptyLayoutRes;
-    private @LayoutRes
-    int errorLayoutRes;
+    private SparseArray<View> viewArray = new SparseArray<>();
+    private SparseArray<OnConvertListener> listenerArray = new SparseArray<>();
 
     public StatusView(@NonNull Context context) {
         this(context, null);
@@ -48,11 +48,11 @@ public class StatusView extends FrameLayout {
         for (int i = 0; i < ta.getIndexCount(); i++) {
             int attr = ta.getIndex(i);
             if (attr == R.styleable.StatusView_sv_loading_view) {
-                loadingLayoutRes = ta.getResourceId(attr, R.layout.sv_loading);
+                loadingLayoutId = ta.getResourceId(attr, loadingLayoutId);
             } else if (attr == R.styleable.StatusView_sv_empty_view) {
-                emptyLayoutRes = ta.getResourceId(attr, R.layout.sv_empty);
+                emptyLayoutId = ta.getResourceId(attr, emptyLayoutId);
             } else if (attr == R.styleable.StatusView_sv_error_view) {
-                errorLayoutRes = ta.getResourceId(attr, R.layout.sv_error);
+                errorLayoutId = ta.getResourceId(attr, errorLayoutId);
             }
         }
         ta.recycle();
@@ -72,24 +72,24 @@ public class StatusView extends FrameLayout {
         return init(contentView);
     }
 
-    public static StatusView init(Activity activity, @IdRes int layoutId) {
+    public static StatusView init(Activity activity, @IdRes int viewId) {
         View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-        View contentView = rootView.findViewById(layoutId);
+        View contentView = rootView.findViewById(viewId);
         return init(contentView);
     }
 
-    public static StatusView init(Fragment fragment, @IdRes int layoutId) {
+    public static StatusView init(Fragment fragment, @IdRes int viewId) {
         View rootView = fragment.getView();
         View contentView = null;
         if (rootView != null) {
-            contentView = rootView.findViewById(layoutId);
+            contentView = rootView.findViewById(viewId);
         }
         return init(contentView);
     }
 
     private static StatusView init(View contentView) {
         if (contentView == null) {
-            throw new RuntimeException("contentView can not be null!");
+            throw new RuntimeException("status view can not be null!");
         }
         ViewGroup.LayoutParams lp = contentView.getLayoutParams();
         ViewGroup parent = (ViewGroup) contentView.getParent();
@@ -107,27 +107,15 @@ public class StatusView extends FrameLayout {
     }
 
     public void setLoadingView(@LayoutRes int loadingLayoutRes) {
-        this.loadingLayoutRes = loadingLayoutRes;
-    }
-
-    public void setLoadingView(View loadingView) {
-        this.loadingView = loadingView;
+        this.loadingLayoutId = loadingLayoutRes;
     }
 
     public void setEmptyView(@LayoutRes int emptyLayoutRes) {
-        this.emptyLayoutRes = emptyLayoutRes;
-    }
-
-    public void setEmptyView(View emptyView) {
-        this.emptyView = emptyView;
+        this.emptyLayoutId = emptyLayoutRes;
     }
 
     public void setErrorView(@LayoutRes int errorLayoutRes) {
-        this.errorLayoutRes = errorLayoutRes;
-    }
-
-    public void setErrorView(View errorView) {
-        this.errorView = errorView;
+        this.errorLayoutId = errorLayoutRes;
     }
 
     public void showContentView() {
@@ -135,51 +123,52 @@ public class StatusView extends FrameLayout {
     }
 
     public void showLoadingView() {
-        if (loadingView == null) {
-            loadingView = inflate(loadingLayoutRes);
-        }
-        switchStatusView(loadingView);
+        switchStatusView(loadingLayoutId);
+        callConvertListener(loadingLayoutId);
     }
 
     public void showEmptyView() {
-        if (emptyView == null) {
-            emptyView = inflate(emptyLayoutRes);
-        }
-        switchStatusView(emptyView);
+        switchStatusView(emptyLayoutId);
+        callConvertListener(emptyLayoutId);
     }
 
     public void showErrorView() {
-        if (errorView == null) {
-            errorView = inflate(errorLayoutRes);
-        }
-        switchStatusView(errorView);
+        switchStatusView(errorLayoutId);
+        callConvertListener(errorLayoutId);
     }
 
-    public ViewHolder setOnLoadingViewConvertListener(OnConvertListener listener) {
-        ViewHolder viewHolder = null;
-        if (listener != null && loadingView != null) {
-            viewHolder = ViewHolder.create(loadingView);
-            listener.onConvert(viewHolder);
-        }
-        return viewHolder;
+    public void setOnLoadingViewConvertListener(OnConvertListener listener) {
+        listenerArray.put(loadingLayoutId, listener);
     }
 
-    public ViewHolder setOnEmptyViewConvertListener(OnConvertListener listener) {
-        ViewHolder viewHolder = null;
-        if (listener != null && emptyView != null) {
-            viewHolder = ViewHolder.create(emptyView);
-            listener.onConvert(viewHolder);
-        }
-        return viewHolder;
+    public void setOnEmptyViewConvertListener(OnConvertListener listener) {
+        listenerArray.put(emptyLayoutId, listener);
     }
 
-    public ViewHolder setOnErrorViewConvertListener(OnConvertListener listener) {
-        ViewHolder viewHolder = null;
-        if (listener != null && errorView != null) {
-            viewHolder = ViewHolder.create(errorView);
+    public void setOnErrorViewConvertListener(OnConvertListener listener) {
+        listenerArray.put(errorLayoutId, listener);
+    }
+
+    public void configLoadingView() {
+
+    }
+
+    public void configEmptyView() {
+
+    }
+
+    public void configErrorView() {
+
+    }
+
+    private void callConvertListener(@LayoutRes int layoutId) {
+        ViewHolder viewHolder;
+        OnConvertListener listener = listenerArray.get(layoutId);
+        View statusView = viewArray.get(layoutId);
+        if (listener != null && statusView != null) {
+            viewHolder = ViewHolder.create(statusView);
             listener.onConvert(viewHolder);
         }
-        return viewHolder;
     }
 
     private void switchStatusView(View statusView) {
@@ -189,6 +178,20 @@ public class StatusView extends FrameLayout {
         removeView(currentView);
         currentView = statusView;
         addView(currentView);
+    }
+
+    private void switchStatusView(@LayoutRes int layoutId) {
+        View statusView = generateStatusView(layoutId);
+        switchStatusView(statusView);
+    }
+
+    private View generateStatusView(@LayoutRes int layoutId) {
+        View statusView = viewArray.get(layoutId);
+        if (statusView == null) {
+            statusView = inflate(layoutId);
+            viewArray.put(layoutId, statusView);
+        }
+        return statusView;
     }
 
     private View inflate(int layoutId) {
