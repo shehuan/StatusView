@@ -6,31 +6,36 @@
 
     <ImageView
         android:id="@+id/sv_error_icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:src="@drawable/sv_error" />
 
     <TextView
-        android:id="@+id/sv_error_tip"
+        android:id="@+id/sv_error_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sv_error_icon"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="加载失败"
-        android:textColor="#999999"
-        android:textSize="16sp" />
+        android:textColor="#2c2c2c"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/sv_error_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sv_error_tip"
+        android:layout_below="@+id/sv_error_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:background="@drawable/retry_background"
+        android:paddingBottom="3dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="3dp"
         android:text="点我重试"
-        android:textColor="#ff0000"
-        android:textSize="16sp" />
+        android:textColor="#888888"
+        android:textSize="14sp" />
 
 </RelativeLayout>

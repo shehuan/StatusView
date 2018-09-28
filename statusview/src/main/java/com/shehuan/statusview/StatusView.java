@@ -8,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ public class StatusView extends FrameLayout {
 
     private SparseArray<View> viewArray = new SparseArray<>();
     private SparseArray<OnConvertListener> listenerArray = new SparseArray<>();
+
+    private StatusViewBuilder builder;
 
     public StatusView(@NonNull Context context) {
         this(context, null);
@@ -89,7 +92,7 @@ public class StatusView extends FrameLayout {
 
     private static StatusView init(View contentView) {
         if (contentView == null) {
-            throw new RuntimeException("status view can not be null!");
+            throw new RuntimeException("content view can not be null!");
         }
         ViewGroup.LayoutParams lp = contentView.getLayoutParams();
         ViewGroup parent = (ViewGroup) contentView.getParent();
@@ -124,17 +127,14 @@ public class StatusView extends FrameLayout {
 
     public void showLoadingView() {
         switchStatusView(loadingLayoutId);
-        callConvertListener(loadingLayoutId);
     }
 
     public void showEmptyView() {
         switchStatusView(emptyLayoutId);
-        callConvertListener(emptyLayoutId);
     }
 
     public void showErrorView() {
         switchStatusView(errorLayoutId);
-        callConvertListener(errorLayoutId);
     }
 
     public void setOnLoadingViewConvertListener(OnConvertListener listener) {
@@ -149,24 +149,18 @@ public class StatusView extends FrameLayout {
         listenerArray.put(errorLayoutId, listener);
     }
 
-    public void configLoadingView() {
-
+    public void config(StatusViewBuilder builder) {
+        this.builder = builder;
     }
 
-    public void configEmptyView() {
-
-    }
-
-    public void configErrorView() {
-
-    }
-
-    private void callConvertListener(@LayoutRes int layoutId) {
+    private void configStatusView(@LayoutRes int layoutId, View statusView) {
         ViewHolder viewHolder;
         OnConvertListener listener = listenerArray.get(layoutId);
-        View statusView = viewArray.get(layoutId);
-        if (listener != null && statusView != null) {
-            viewHolder = ViewHolder.create(statusView);
+
+        viewHolder = ViewHolder.create(statusView);
+        updateStatusView(layoutId, viewHolder);
+
+        if (listener != null) {
             listener.onConvert(viewHolder);
         }
     }
@@ -190,8 +184,57 @@ public class StatusView extends FrameLayout {
         if (statusView == null) {
             statusView = inflate(layoutId);
             viewArray.put(layoutId, statusView);
+            configStatusView(layoutId, statusView);
         }
         return statusView;
+    }
+
+    private void updateStatusView(@LayoutRes int layoutId, ViewHolder viewHolder) {
+        if (builder == null) {
+            return;
+        }
+
+        if (layoutId == R.layout.sv_loading_layout) {
+            if (!TextUtils.isEmpty(builder.getLoadingText()))
+                viewHolder.setText(R.id.sv_loading_text, builder.getLoadingText());
+
+        } else if (layoutId == R.layout.sv_empty_layout) {
+            if (!TextUtils.isEmpty(builder.getEmptyText()))
+                viewHolder.setText(R.id.sv_empty_text, builder.getEmptyText());
+
+            if (builder.getEmptyIcon() > 0)
+                viewHolder.setImageResource(R.id.sv_empty_icon, builder.getEmptyIcon());
+
+            if (builder.isShowEmptyRetry()) {
+                if (!TextUtils.isEmpty(builder.getEmptyRetryText()))
+                    viewHolder.setText(R.id.sv_empty_retry, builder.getEmptyRetryText());
+
+                if (builder.getEmptyRetryClickListener() != null)
+                    viewHolder.setOnClickListener(R.id.sv_empty_retry, builder.getEmptyRetryClickListener());
+
+                if (builder.getRetryDrawable() > 0)
+                    viewHolder.setBackgroundDrawable(R.id.sv_empty_retry, getResources().getDrawable(builder.getRetryDrawable()));
+            }
+
+        } else if (layoutId == R.layout.sv_error_layout) {
+            if (!TextUtils.isEmpty(builder.getErrorText()))
+                viewHolder.setText(R.id.sv_error_text, builder.getErrorText());
+
+
+            if (builder.getErrorIcon() > 0)
+                viewHolder.setImageResource(R.id.sv_error_icon, builder.getErrorIcon());
+
+            if (builder.isShowErrorRetry()) {
+                if (!TextUtils.isEmpty(builder.getErrorRetryText()))
+                    viewHolder.setText(R.id.sv_error_retry, builder.getErrorRetryText());
+
+                if (builder.getErrorRetryClickListener() != null)
+                    viewHolder.setOnClickListener(R.id.sv_error_retry, builder.getErrorRetryClickListener());
+
+                if (builder.getRetryDrawable() > 0)
+                    viewHolder.setBackgroundDrawable(R.id.sv_error_retry, getResources().getDrawable(builder.getRetryDrawable()));
+            }
+        }
     }
 
     private View inflate(int layoutId) {

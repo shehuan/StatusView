@@ -1,7 +1,9 @@
 package com.shehuan.statusview;
 
+import android.graphics.drawable.Drawable;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ViewHolder {
@@ -46,9 +48,19 @@ public class ViewHolder {
         textView.setTextColor(colorId);
     }
 
+    public void setTextSize(int viewId, int size) {
+        TextView textView = getView(viewId);
+        textView.setTextSize(size);
+    }
+
     public void setOnClickListener(int viewId, View.OnClickListener clickListener) {
         View view = getView(viewId);
         view.setOnClickListener(clickListener);
+    }
+
+    public void setImageResource(int viewId, int resId) {
+        ImageView imageView = (ImageView) getView(viewId);
+        imageView.setImageResource(resId);
     }
 
     public void setBackgroundResource(int viewId, int resId) {
@@ -59,5 +71,10 @@ public class ViewHolder {
     public void setBackgroundColor(int viewId, int colorId) {
         View view = getView(viewId);
         view.setBackgroundColor(colorId);
+    }
+
+    public void setBackgroundDrawable(int viewId, Drawable drawable){
+        View view = getView(viewId);
+        view.setBackgroundDrawable(drawable);
     }
 }
