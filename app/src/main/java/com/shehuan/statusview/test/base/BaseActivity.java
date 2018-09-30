@@ -1,4 +1,4 @@
-package com.shehuan.statusview.test;
+package com.shehuan.statusview.test.base;
 
 import android.content.Context;
 import android.os.Bundle;

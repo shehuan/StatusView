@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    tools:context=".TypeFragment0">
 
     <TextView
-        android:id="@+id/tv_retry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="出错了!\n点我再试一次..."
         android:textColor="#2c2c2c"
-        android:textSize="20sp" />
-
+        android:textSize="24sp" />
 </RelativeLayout>

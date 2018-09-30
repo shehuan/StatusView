@@ -1,17 +1,17 @@
 package com.shehuan.statusview;
 
 import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.view.View;
 
 public class StatusViewBuilder {
     // loading 提示信息
-    private String loadingText;
+    private String loadingTip;
     // empty 提示信息
-    private String emptyText;
+    private String emptyTip;
     // error 提示信息
-    private String errorText;
+    private String errorTip;
     // 提示信息颜色
     private int tipColor;
     // 提示信息字体大小
@@ -39,16 +39,16 @@ public class StatusViewBuilder {
     // error 重试按钮点击事件
     private View.OnClickListener errorRetryClickListener;
 
-    public String getLoadingText() {
-        return loadingText;
+    public String getLoadingTip() {
+        return loadingTip;
     }
 
-    public String getEmptyText() {
-        return emptyText;
+    public String getEmptyTip() {
+        return emptyTip;
     }
 
-    public String getErrorText() {
-        return errorText;
+    public String getErrorTip() {
+        return errorTip;
     }
 
     public int getTipColor() {
@@ -104,9 +104,9 @@ public class StatusViewBuilder {
     }
 
     public StatusViewBuilder(Builder builder) {
-        this.loadingText = builder.loadingText;
-        this.emptyText = builder.emptyText;
-        this.errorText = builder.errorText;
+        this.loadingTip = builder.loadingTip;
+        this.emptyTip = builder.emptyTip;
+        this.errorTip = builder.errorTip;
         this.tipColor = builder.tipColor;
         this.tipSize = builder.tipSize;
         this.emptyIcon = builder.emptyIcon;
@@ -123,9 +123,9 @@ public class StatusViewBuilder {
     }
 
     public static class Builder {
-        private String loadingText;
-        private String emptyText;
-        private String errorText;
+        private String loadingTip;
+        private String emptyTip;
+        private String errorTip;
         private int tipColor;
         private int tipSize;
 
@@ -142,22 +142,22 @@ public class StatusViewBuilder {
         private View.OnClickListener emptyRetryClickListener;
         private View.OnClickListener errorRetryClickListener;
 
-        public Builder setLoadingText(String loadingText) {
-            this.loadingText = loadingText;
+        public Builder setLoadingTip(String loadingTip) {
+            this.loadingTip = loadingTip;
             return this;
         }
 
         public Builder setEmptyip(String emptyTip) {
-            this.emptyText = emptyTip;
+            this.emptyTip = emptyTip;
             return this;
         }
 
-        public Builder setErrorText(String errorText) {
-            this.errorText = errorText;
+        public Builder setErrorTip(String errorTip) {
+            this.errorTip = errorTip;
             return this;
         }
 
-        public Builder setTipColor(@ColorInt int tipColor) {
+        public Builder setTipColor(@ColorRes int tipColor) {
             this.tipColor = tipColor;
             return this;
         }
@@ -197,7 +197,7 @@ public class StatusViewBuilder {
             return this;
         }
 
-        public Builder setRetryColor(@ColorInt int retryColor) {
+        public Builder setRetryColor(@ColorRes int retryColor) {
             this.retryColor = retryColor;
             return this;
         }

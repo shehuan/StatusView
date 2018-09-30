@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/sv_loading_text"
+        android:id="@+id/sv_loading_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sv_loading_progressbar"

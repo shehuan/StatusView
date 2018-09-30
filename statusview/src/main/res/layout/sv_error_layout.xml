@@ -12,7 +12,7 @@
         android:src="@drawable/sv_error" />
 
     <TextView
-        android:id="@+id/sv_error_text"
+        android:id="@+id/sv_error_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sv_error_icon"
@@ -26,7 +26,7 @@
         android:id="@+id/sv_error_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sv_error_text"
+        android:layout_below="@+id/sv_error_tip"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/retry_background"
