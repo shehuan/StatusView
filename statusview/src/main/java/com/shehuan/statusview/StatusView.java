@@ -79,7 +79,7 @@ public class StatusView extends FrameLayout {
     }
 
     /**
-     * 在 Activity 中的初始化方法，默认页面的 ContentView 使用多状态布局
+     * 在 Activity 中的初始化方法，默认页面的根布局使用多状态布局
      *
      * @param activity
      * @return
@@ -99,6 +99,17 @@ public class StatusView extends FrameLayout {
     public static StatusView init(Activity activity, @IdRes int viewId) {
         View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
         View contentView = rootView.findViewById(viewId);
+        return init(contentView);
+    }
+
+    /**
+     * 在 Fragment 中的初始化方法，默认页面的根布局使用多状态布局
+     *
+     * @param fragment
+     * @return
+     */
+    public static StatusView init(Fragment fragment) {
+        View contentView = fragment.getView();
         return init(contentView);
     }
 
