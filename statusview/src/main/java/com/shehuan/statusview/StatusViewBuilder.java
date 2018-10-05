@@ -1,6 +1,5 @@
 package com.shehuan.statusview;
 
-import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.view.View;
@@ -20,19 +19,19 @@ public class StatusViewBuilder {
     private int emptyIcon;
     // error 图标
     private int errorIcon;
-    // 是否显示 empty 重试重试按钮
+    // 是否显示 empty 重试按钮
     private boolean showEmptyRetry;
-    // 是否显示 error 重试重试按钮
+    // 是否显示 error 重试按钮
     private boolean showErrorRetry;
     // empty 重试按钮文字
     private String emptyRetryText;
     // error 重试按钮文字
     private String errorRetryText;
-    // retry 按钮文字颜色
+    // 重试按钮文字颜色
     private int retryColor;
-    // retry 按钮字体大小
+    // 重试按钮字体大小
     private int retrySize;
-    // retry 按钮 drawable 背景
+    // 重试按钮 drawable 背景
     private int retryDrawable;
     // empty 重试按钮点击事件
     private View.OnClickListener emptyRetryClickListener;
