@@ -3,14 +3,14 @@
 [StatusView Demo 体验](https://fir.im/3y8x?release_id=5bb05700959d694dd3e7169b)
 ### 一、效果预览
 ### 二、主要功能
-* 可作用于 Activity、Fragment 的根布局或其子View
+* 可在 Activity、Fragment 、XML 中使用，可作用于XML的根布局View或其子View
 * 默认支持 Loading、Empty、Error 三种状态布局，可进行常规配置
 * 可自定义状态布局，并提供对应接口来完成需要的配置
 * 状态布局懒加载，仅在初次显示时初始化
 
 注意：当 ViewPager 嵌套 Fragment 时，如果 Fragment 的根布局 View 需要使用 StatusView 请在 XML 中使用，否则会出现页面空白的问题！
 ### 三、使用
-###### 1、添加依赖
+##### 1、添加依赖
 ```java
 allprojects {
     repositories {
@@ -24,12 +24,12 @@ dependencies {
     implementation 'com.github.SheHuan:StatusView:1.0.0'
 }
 ```
-###### 2、初始化
+##### 2、初始化
 可以直接在 XML 中初始化，也可以在 Activity、Fragment中初始化：
 ```java
 statusView = StatusView.init()
 ```
-###### 3、配置
+##### 3、配置
 如果使用默认的状态布局，可以通过如下方式配置布局：
 ```java
 statusView.config(new StatusViewBuilder.Builder()
@@ -85,7 +85,7 @@ statusView.setOnErrorViewConvertListener(new StatusViewConvertListener() {
     }
 });
 ```
-###### 4、切换状态布局
+##### 4、切换状态布局
 ```java
 statusView.showLoadingView();
 statusView.showEmptyView();
