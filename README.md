@@ -2,6 +2,7 @@
 
 [StatusView Demo 体验](https://fir.im/3y8x?release_id=5bb05700959d694dd3e7169b)
 ### 一、效果预览
+![](images/demo.gif)
 ### 二、主要功能
 * 可在 Activity、Fragment 、XML 中使用，可作用于XML的根布局View或其子View
 * 默认支持 Loading、Empty、Error 三种状态布局，可进行常规配置
