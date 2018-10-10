@@ -4,12 +4,11 @@
 ### 一、效果预览
 ![](images/demo.gif)
 ### 二、主要功能
-* 可在 Activity、Fragment 、XML 中使用，可作用于XML的根布局View或其子View
+* 可在 Activity、Fragment 、XML 中使用，可作用于 XML 的根布局 View 或其子 View
 * 默认支持 Loading、Empty、Error 三种状态布局，可进行常规配置
 * 可自定义状态布局，并提供对应接口来完成需要的配置
 * 状态布局懒加载，仅在初次显示时初始化
 
-注意：当 ViewPager 嵌套 Fragment 时，如果 Fragment 的根布局 View 需要使用 StatusView 请在 XML 中使用，否则会出现页面空白的问题！
 ### 三、使用
 ##### 1、添加依赖
 ```java
@@ -22,13 +21,13 @@ allprojects {
 ```
 ```java
 dependencies {
-    implementation 'com.github.SheHuan:StatusView:1.0.0'
+    implementation 'com.github.SheHuan:StatusView:1.0.1'
 }
 ```
 ##### 2、初始化
 可以直接在 XML 中初始化，也可以在 Activity、Fragment中初始化：
 ```java
-statusView = StatusView.init()
+statusView = StatusView.init();
 ```
 ##### 3、配置
 如果使用默认的状态布局，可以通过如下方式配置布局：
@@ -93,5 +92,18 @@ statusView.showEmptyView();
 statusView.showErrorView();
 statusView.showContentView(); // 即原始的页面内容布局
 ```
+##### 5、更自由的用法
+如果不想局限于 Loading、Empty、Error 三种状态，那么下面的用法会更适合你：
+```java
+// 添加指定索引对应的状态布局
+statusView.setStatusView(int index, @LayoutRes int layoutId)
+// 为指定索引的状态布局设置初次显示的监听事件，用来进行状态布局的相关初始化
+statusView.setOnStatusViewConvertListener(int index, StatusViewConvertListener listener)
+// 显示指定索引的状态布局
+statusView.showStatusView(int index)
+```
+##### 6、注意
+* 当 ViewPager 嵌套 Fragment 时，如果 Fragment 的根布局 View 需要使用 StatusView 请在 XML 中使用，否则会出现页面空白的问题！
+* 当直接在 Fragment 中使用时，`init()`方法需要在`onCreateView()`之后的生命周期方法中执行！
 
 更多使用细节可参考demo！

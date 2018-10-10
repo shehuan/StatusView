@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,12 @@ public class StatusView extends FrameLayout {
     private @LayoutRes
     int errorLayoutId = R.layout.sv_error_layout;
 
-    // View 缓存集合
+    // 状态布局 View 缓存集合
     private SparseArray<View> viewArray = new SparseArray<>();
-    // View 显示时的回调接口集合
+    // 状态布局 View 显示时的回调接口集合
     private SparseArray<StatusViewConvertListener> listenerArray = new SparseArray<>();
+    // 索引对应的状态布局 Id 集合
+    private SparseIntArray layoutIdArray = new SparseIntArray();
 
     // 默认状态布局文件属性配置
     private StatusViewBuilder builder;
@@ -222,6 +225,35 @@ public class StatusView extends FrameLayout {
      */
     public void setOnErrorViewConvertListener(StatusViewConvertListener listener) {
         listenerArray.put(errorLayoutId, listener);
+    }
+
+    /**
+     * 设置索引对应的状态布局
+     *
+     * @param index    布局索引
+     * @param layoutId 布局 Id
+     */
+    public void setStatusView(int index, @LayoutRes int layoutId) {
+        layoutIdArray.put(index, layoutId);
+    }
+
+    /**
+     * 显示指定索引对应的状态布局
+     *
+     * @param index 布局索引
+     */
+    public void showStatusView(int index) {
+        switchStatusView(layoutIdArray.get(index));
+    }
+
+    /**
+     * 为指定索引对应的状态布局设置初次显示的监听事件，用来进行状态布局的相关初始化
+     *
+     * @param index    布局索引
+     * @param listener
+     */
+    public void setOnStatusViewConvertListener(int index, StatusViewConvertListener listener) {
+        listenerArray.put(layoutIdArray.get(index), listener);
     }
 
     /**
