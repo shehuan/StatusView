@@ -83,7 +83,7 @@ statusView.config(new StatusViewBuilder.Builder()
 如果需要使用自定义状态布局，可以通过如下方式设置：
 ```java
 statusView.setLoadingView(@LayoutRes int layoutId);
-statusView.setLoadingView(@LayoutRes int layoutId);
+statusView.setEmptyView(@LayoutRes int layoutId);
 statusView.setErrorView(@LayoutRes int layoutId);
 ```
 或者在 XML 通过自定义属性配置，自定义属性的声明如下
