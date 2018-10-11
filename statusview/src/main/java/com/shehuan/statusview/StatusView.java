@@ -106,17 +106,6 @@ public class StatusView extends FrameLayout {
     }
 
     /**
-     * 在 Fragment 中的初始化方法，默认页面的根布局使用多状态布局
-     *
-     * @param fragment
-     * @return
-     */
-    public static StatusView init(Fragment fragment) {
-        View contentView = fragment.getView();
-        return init(contentView);
-    }
-
-    /**
      * 在Fragment中的初始化方法
      *
      * @param fragment

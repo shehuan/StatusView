@@ -21,14 +21,32 @@ allprojects {
 ```
 ```java
 dependencies {
-    implementation 'com.github.SheHuan:StatusView:1.0.1'
+    implementation 'com.github.SheHuan:StatusView:1.0.2'
 }
 ```
 ##### 2、初始化
-可以直接在 XML 中初始化，也可以在 Activity、Fragment中初始化：
+可以直接在 XML 中初始化：
 ```java
-statusView = StatusView.init();
+<com.shehuan.statusview.StatusView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--your layout-->
+
+</com.shehuan.statusview.StatusView>
 ```
+也可以在 Activity、Fragment中初始化：
+```java
+// 作用于 Activity 根布局 View
+statusView = StatusView.init(Activity activity);
+// 作用于 Activity 布局文件中指定的 View
+statusView = StatusView.init(Activity activity, @IdRes int viewId);
+// 作用于 Fragment 布局文件中指定的 View
+statusView = StatusView.init(Fragment fragment, @IdRes int viewId);
+```
+注意事项：
+* 当 Fragment 布局文件的根 View 使用 StatusView 时，为避免出现的异常问题，建议在 XML 中初始化！
+* 当直接在 Fragment 中使用时，`init()`方法需要在`onCreateView()`之后的生命周期方法中执行！
 ##### 3、配置
 如果使用默认的状态布局，可以通过如下方式配置布局：
 ```java
@@ -64,9 +82,9 @@ statusView.config(new StatusViewBuilder.Builder()
 
 如果需要使用自定义状态布局，可以通过如下方式设置：
 ```java
-statusView.setLoadingView();
-statusView.setLoadingView();
-statusView.setErrorView();
+statusView.setLoadingView(@LayoutRes int layoutId);
+statusView.setLoadingView(@LayoutRes int layoutId);
+statusView.setErrorView(@LayoutRes int layoutId);
 ```
 或者在 XML 通过自定义属性配置，自定义属性的声明如下
 ```java
@@ -102,8 +120,5 @@ statusView.setOnStatusViewConvertListener(int index, StatusViewConvertListener l
 // 显示指定索引的状态布局
 statusView.showStatusView(int index)
 ```
-##### 6、注意
-* 当 ViewPager 嵌套 Fragment 时，如果 Fragment 的根布局 View 需要使用 StatusView 请在 XML 中使用，否则会出现页面空白的问题！
-* 当直接在 Fragment 中使用时，`init()`方法需要在`onCreateView()`之后的生命周期方法中执行！
 
 更多使用细节可参考demo！
