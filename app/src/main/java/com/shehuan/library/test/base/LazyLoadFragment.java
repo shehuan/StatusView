@@ -1,4 +1,4 @@
-package com.shehuan.statusview.test.base;
+package com.shehuan.library.test.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

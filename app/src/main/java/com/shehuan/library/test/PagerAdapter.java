@@ -1,4 +1,4 @@
-package com.shehuan.statusview.test;
+package com.shehuan.library.test;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

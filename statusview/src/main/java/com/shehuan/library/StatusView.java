@@ -1,4 +1,4 @@
-package com.shehuan.statusview;
+package com.shehuan.library;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.shehuan.statusview.test;
+package com.shehuan.library;
 
 import org.junit.Test;
 

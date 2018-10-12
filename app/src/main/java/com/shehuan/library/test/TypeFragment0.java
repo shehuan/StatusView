@@ -1,13 +1,13 @@
-package com.shehuan.statusview.test;
+package com.shehuan.library.test;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
-import com.shehuan.statusview.StatusView;
-import com.shehuan.statusview.StatusViewBuilder;
-import com.shehuan.statusview.test.base.LazyLoadFragment;
+import com.shehuan.library.StatusView;
+import com.shehuan.library.StatusViewBuilder;
+import com.shehuan.library.test.base.LazyLoadFragment;
 
 import butterknife.BindView;
 

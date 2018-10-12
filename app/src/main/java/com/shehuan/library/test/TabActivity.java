@@ -1,4 +1,4 @@
-package com.shehuan.statusview.test;
+package com.shehuan.library.test;
 
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -6,10 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.shehuan.statusview.StatusView;
-import com.shehuan.statusview.StatusViewConvertListener;
-import com.shehuan.statusview.ViewHolder;
-import com.shehuan.statusview.test.base.BaseActivity;
+import com.shehuan.library.StatusView;
+import com.shehuan.library.StatusViewConvertListener;
+import com.shehuan.library.ViewHolder;
+import com.shehuan.library.test.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

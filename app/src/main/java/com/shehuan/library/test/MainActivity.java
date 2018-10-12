@@ -1,12 +1,12 @@
-package com.shehuan.statusview.test;
+package com.shehuan.library.test;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
 
-import com.shehuan.statusview.StatusView;
-import com.shehuan.statusview.StatusViewBuilder;
-import com.shehuan.statusview.test.base.BaseActivity;
+import com.shehuan.library.StatusView;
+import com.shehuan.library.StatusViewBuilder;
+import com.shehuan.library.test.base.BaseActivity;
 
 import butterknife.OnClick;
 

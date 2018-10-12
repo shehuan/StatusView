@@ -1,4 +1,4 @@
-package com.shehuan.statusview;
+package com.shehuan.library;
 
 import android.graphics.drawable.Drawable;
 import android.util.SparseArray;
