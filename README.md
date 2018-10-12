@@ -27,13 +27,13 @@ dependencies {
 ##### 2、初始化
 可以直接在 XML 中初始化：
 ```java
-<com.shehuan.statusview.StatusView
+<com.shehuan.library.StatusView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!--your layout-->
 
-</com.shehuan.statusview.StatusView>
+</com.shehuan.library.StatusView>
 ```
 也可以在 Activity、Fragment中初始化：
 ```java
