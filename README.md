@@ -21,7 +21,7 @@ allprojects {
 ```
 ```java
 dependencies {
-    implementation 'com.github.SheHuan:StatusView:1.0.3'
+    implementation 'com.github.SheHuan:StatusView:1.0.4'
 }
 ```
 ##### 2、初始化

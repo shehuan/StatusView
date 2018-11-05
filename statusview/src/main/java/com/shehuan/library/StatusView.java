@@ -367,6 +367,8 @@ public class StatusView extends FrameLayout {
 
             if (builder.getRetrySize() > 0)
                 viewHolder.setTextSize(viewId, builder.getRetrySize());
+        } else {
+            viewHolder.getView(viewId).setVisibility(GONE);
         }
     }
 
