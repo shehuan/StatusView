@@ -1,4 +1,4 @@
-package com.shehuan.library;
+package com.shehuan.statusview;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;

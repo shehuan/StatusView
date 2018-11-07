@@ -21,13 +21,13 @@ allprojects {
 ```
 ```java
 dependencies {
-    implementation 'com.github.SheHuan:StatusView:1.0.4'
+    implementation 'com.github.SheHuan:StatusView:1.0.5'
 }
 ```
 ##### 2、初始化
 可以直接在 XML 中初始化：
 ```java
-<com.shehuan.library.StatusView
+<com.shehuan.statusview.StatusView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.shehuan.library.StatusView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.shehuan.statusview.StatusView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/status_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -19,4 +19,4 @@
             android:textSize="24sp" />
 
     </RelativeLayout>
-</com.shehuan.library.StatusView>
+</com.shehuan.statusview.StatusView>
